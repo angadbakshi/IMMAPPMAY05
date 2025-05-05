@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../buildMultiTargeting/CanadianVisaChatbot.Api.props" />
+</Project>

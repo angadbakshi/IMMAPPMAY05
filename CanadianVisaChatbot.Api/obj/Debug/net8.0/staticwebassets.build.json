@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "gFkZhH+LHQVvT9HR0YOxt0wWve8jLQ5CFXjPZqQqkmA=",
+  "Source": "CanadianVisaChatbot.Api",
+  "BasePath": "_content/CanadianVisaChatbot.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

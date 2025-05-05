@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "883408239178",
+    "project_id": "immapp-490ce",
+    "storage_bucket": "immapp-490ce.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:883408239178:android:f77db5ac50b90cddd504b3",
+        "android_client_info": {
+          "package_name": "com.companyname.immapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJQYPxaF9SJkJpWo5Vo_9cIjMAVkQ6UP4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

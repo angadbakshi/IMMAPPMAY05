@@ -1,0 +1,12 @@
+/Users/angadbakshi/Projects/IMMAPPMAY05/CanadianVisaChatbot.Shared/obj/Debug/net8.0/CanadianVisaChatbot.Shared.csproj.AssemblyReference.cache
+/Users/angadbakshi/Projects/IMMAPPMAY05/CanadianVisaChatbot.Shared/obj/Debug/net8.0/CanadianVisaChatbot.Shared.GeneratedMSBuildEditorConfig.editorconfig
+/Users/angadbakshi/Projects/IMMAPPMAY05/CanadianVisaChatbot.Shared/obj/Debug/net8.0/CanadianVisaChatbot.Shared.AssemblyInfoInputs.cache
+/Users/angadbakshi/Projects/IMMAPPMAY05/CanadianVisaChatbot.Shared/obj/Debug/net8.0/CanadianVisaChatbot.Shared.AssemblyInfo.cs
+/Users/angadbakshi/Projects/IMMAPPMAY05/CanadianVisaChatbot.Shared/obj/Debug/net8.0/CanadianVisaChatbot.Shared.csproj.CoreCompileInputs.cache
+/Users/angadbakshi/Projects/IMMAPPMAY05/CanadianVisaChatbot.Shared/bin/Debug/net8.0/CanadianVisaChatbot.Shared.deps.json
+/Users/angadbakshi/Projects/IMMAPPMAY05/CanadianVisaChatbot.Shared/bin/Debug/net8.0/CanadianVisaChatbot.Shared.dll
+/Users/angadbakshi/Projects/IMMAPPMAY05/CanadianVisaChatbot.Shared/bin/Debug/net8.0/CanadianVisaChatbot.Shared.pdb
+/Users/angadbakshi/Projects/IMMAPPMAY05/CanadianVisaChatbot.Shared/obj/Debug/net8.0/CanadianVisaChatbot.Shared.dll
+/Users/angadbakshi/Projects/IMMAPPMAY05/CanadianVisaChatbot.Shared/obj/Debug/net8.0/refint/CanadianVisaChatbot.Shared.dll
+/Users/angadbakshi/Projects/IMMAPPMAY05/CanadianVisaChatbot.Shared/obj/Debug/net8.0/CanadianVisaChatbot.Shared.pdb
+/Users/angadbakshi/Projects/IMMAPPMAY05/CanadianVisaChatbot.Shared/obj/Debug/net8.0/ref/CanadianVisaChatbot.Shared.dll
