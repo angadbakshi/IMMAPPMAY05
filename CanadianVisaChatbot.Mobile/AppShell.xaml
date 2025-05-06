@@ -3,13 +3,43 @@
     x:Class="CanadianVisaChatbot.Mobile.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:CanadianVisaChatbot.Mobile"
-    Shell.FlyoutBehavior="Flyout"
-    Title="CanadianVisaChatbot.Mobile">
+    xmlns:local="clr-namespace:CanadianVisaChatbot.Mobile.Views"
+    Shell.FlyoutBehavior="Disabled"
+    Title="Canadian Visa Assistant">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar>
+        <Tab Title="Chat Assistant" Route="chat">
+            <Tab.Icon>
+                <FontImageSource FontFamily="{OnPlatform iOS='SFProRounded', Android='MaterialIcons'}"
+                               Glyph="{OnPlatform iOS='􀜙', Android='chat'}"
+                               Color="{StaticResource Primary}"
+                               Size="24"/>
+            </Tab.Icon>
+            <ShellContent ContentTemplate="{DataTemplate local:ChatPage}" />
+        </Tab>
+
+        <Tab Title="Visa Applications" Route="applications">
+            <Tab.Icon>
+                <FontImageSource FontFamily="{OnPlatform iOS='SFProRounded', Android='MaterialIcons'}"
+                               Glyph="{OnPlatform iOS='􀈷', Android='description'}"
+                               Color="{StaticResource Primary}"
+                               Size="24"/>
+            </Tab.Icon>
+            <ShellContent ContentTemplate="{DataTemplate local:VisaApplicationPage}" />
+        </Tab>
+    </TabBar>
+
+    <!-- Additional Routes -->
+    <ShellContent Route="applications/details"
+                  ContentTemplate="{DataTemplate local:VisaApplicationDetailPage}"
+                  Shell.PresentationMode="ModalAnimated" />
+
+    <ShellContent Route="applications/upload"
+                  ContentTemplate="{DataTemplate local:DocumentUploadPage}"
+                  Shell.PresentationMode="ModalAnimated" />
+
+    <ShellContent Route="applications/new"
+                  ContentTemplate="{DataTemplate local:NewApplicationPage}"
+                  Shell.PresentationMode="ModalAnimated" />
 
 </Shell>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:CanadianVisaChatbot.Mobile.ViewModels"
+             xmlns:models="clr-namespace:CanadianVisaChatbot.Shared.Models;assembly=CanadianVisaChatbot.Shared"
+             x:Class="CanadianVisaChatbot.Mobile.Views.VisaApplicationPage"
+             x:DataType="viewmodels:VisaApplicationViewModel"
+             Title="Visa Applications">
+
+    <Grid RowDefinitions="Auto,*">
+        <!-- Error Message -->
+        <Label Text="{Binding ErrorMessage}"
+               TextColor="Red"
+               IsVisible="{Binding ErrorMessage, Converter={StaticResource StringNotNullOrEmptyConverter}}"
+               Margin="10"
+               Grid.Row="0"/>
+
+        <ScrollView Grid.Row="1">
+            <StackLayout Padding="20">
+                <!-- Loading Indicator -->
+                <ActivityIndicator IsRunning="{Binding IsBusy}"
+                                IsVisible="{Binding IsBusy}"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"/>
+
+                <!-- New Application Section -->
+                <StackLayout IsVisible="{Binding IsNewApplication}">
+                    <Label Text="Select Visa Type:"
+                           FontSize="18"
+                           Margin="0,0,0,10"/>
+                    
+                    <Picker ItemsSource="{Binding Source={x:Static Member=models:VisaTypeExtensions.Values}}"
+                            SelectedItem="{Binding SelectedVisaType}"/>
+                    
+                    <Button Text="Create Application"
+                            Command="{Binding CreateApplicationCommand}"
+                            Margin="0,10,0,0"/>
+                    
+                    <Button Text="Cancel"
+                            Command="{Binding CancelNewApplicationCommand}"
+                            BackgroundColor="Gray"
+                            Margin="0,10,0,0"/>
+                </StackLayout>
+
+                <!-- Applications List -->
+                <StackLayout IsVisible="{Binding IsNewApplication, Converter={StaticResource InvertedBoolConverter}}">
+                    <Button Text="Start New Application"
+                           Command="{Binding StartNewApplicationCommand}"
+                           Margin="0,0,0,20"/>
+
+                    <CollectionView ItemsSource="{Binding Applications}"
+                                  SelectionMode="Single"
+                                  SelectedItem="{Binding CurrentApplication}">
+                        <CollectionView.EmptyView>
+                            <Label Text="No applications found."
+                                   HorizontalOptions="Center"/>
+                        </CollectionView.EmptyView>
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:VisaApplication">
+                                <Frame Margin="0,0,0,10" Padding="10">
+                                    <Grid ColumnDefinitions="*,Auto">
+                                        <StackLayout Grid.Column="0">
+                                            <Label Text="{Binding Type}"
+                                                   FontSize="18"
+                                                   FontAttributes="Bold"/>
+                                            <Label Text="{Binding Status}"/>
+                                            <Label Text="{Binding CreatedDate, StringFormat='Created: {0:d}'}"
+                                                   FontSize="12"/>
+                                        </StackLayout>
+                                        
+                                        <StackLayout Grid.Column="1"
+                                                     VerticalOptions="Center">
+                                            <Label Text="{Binding Documents.Count, StringFormat='{0} Documents'}"/>
+                                        </StackLayout>
+                                    </Grid>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+
+                <!-- Current Application Details -->
+                <StackLayout IsVisible="{Binding CurrentApplication, Converter={StaticResource NotNullConverter}}">
+                    <BoxView HeightRequest="1"
+                            BackgroundColor="Gray"
+                            Margin="0,20"/>
+
+                    <Label Text="Application Progress"
+                           FontSize="20"
+                           FontAttributes="Bold"/>
+
+                    <ProgressBar Progress="{Binding Progress.Percentage}"
+                                Margin="0,10"/>
+
+                    <Label Text="{Binding Progress.CurrentStep.Name}"
+                           FontSize="16"
+                           Margin="0,10"/>
+
+                    <!-- Document List -->
+                    <Label Text="Required Documents"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           Margin="0,20,0,10"/>
+
+                    <CollectionView ItemsSource="{Binding CurrentApplication.Documents}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:DocumentInfo">
+                                <Frame Margin="0,0,0,10" Padding="10">
+                                    <Grid ColumnDefinitions="*,Auto">
+                                        <StackLayout Grid.Column="0">
+                                            <Label Text="{Binding Name}"
+                                                   FontAttributes="Bold"/>
+                                            <Label Text="{Binding Status}"/>
+                                            <Label Text="{Binding SubmittedDate, StringFormat='Submitted: {0:d}'}"
+                                                   IsVisible="{Binding SubmittedDate, Converter={StaticResource NotNullConverter}}"/>
+                                        </StackLayout>
+                                        
+                                        <Button Grid.Column="1"
+                                                Text="Download"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:VisaApplicationViewModel}}, Path=DownloadDocumentCommand}"
+                                                CommandParameter="{Binding}"
+                                                IsVisible="{Binding StoragePath, Converter={StaticResource StringNotNullOrEmptyConverter}}"/>
+                                    </Grid>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

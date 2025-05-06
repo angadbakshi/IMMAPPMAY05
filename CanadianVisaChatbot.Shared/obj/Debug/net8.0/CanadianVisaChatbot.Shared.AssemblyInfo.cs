@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CanadianVisaChatbot.Shared")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0a7249af5fb07538dcd93cc7424010a99e815b84")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6cb711fbaaeaebe19e63daccb8442c87adc4dea6")]
 [assembly: System.Reflection.AssemblyProductAttribute("CanadianVisaChatbot.Shared")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CanadianVisaChatbot.Shared")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

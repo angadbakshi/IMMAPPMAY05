@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:CanadianVisaChatbot.Mobile.ViewModels"
+             xmlns:models="clr-namespace:CanadianVisaChatbot.Shared.Models;assembly=CanadianVisaChatbot.Shared"
+             x:Class="CanadianVisaChatbot.Mobile.Views.NewApplicationPage"
+             x:DataType="vm:VisaApplicationViewModel"
+             Title="New Visa Application">
+
+    <ScrollView>
+        <StackLayout Padding="20">
+            <!-- Error Message -->
+            <Label Text="{Binding ErrorMessage}"
+                   TextColor="Red"
+                   IsVisible="{Binding ErrorMessage, Converter={StaticResource StringNotNullOrEmptyConverter}}"
+                   Margin="0,0,0,20"/>
+
+            <!-- Visa Type Selection -->
+            <Label Text="Select Visa Type"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   Margin="0,0,0,10"/>
+
+            <Frame BorderColor="{StaticResource Primary}"
+                   HasShadow="True"
+                   Padding="15"
+                   Margin="0,0,0,20">
+                <Picker ItemsSource="{Binding Source={x:Static Member=models:VisaTypeExtensions.Values}}"
+                        SelectedItem="{Binding SelectedVisaType}"
+                        Title="Choose visa type"/>
+            </Frame>
+
+            <!-- Information Box -->
+            <Frame BackgroundColor="{StaticResource Background}"
+                   BorderColor="{StaticResource Secondary}"
+                   HasShadow="False"
+                   Padding="15"
+                   Margin="0,0,0,20">
+                <StackLayout>
+                    <Label Text="Important Information"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource Secondary}"/>
+                    <Label Text="Creating a new application will start the visa application process. You will need to:"/>
+                    <Label Text="• Upload required documents"
+                           Margin="20,5,0,0"/>
+                    <Label Text="• Provide personal information"
+                           Margin="20,0,0,0"/>
+                    <Label Text="• Complete all required steps"
+                           Margin="20,0,0,0"/>
+                    <Label Text="• Track your application progress"
+                           Margin="20,0,0,0"/>
+                </StackLayout>
+            </Frame>
+
+            <!-- Create Button -->
+            <Button Text="Create Application"
+                    Command="{Binding CreateApplicationCommand}"
+                    IsEnabled="{Binding SelectedVisaType, Converter={StaticResource NotNullConverter}}"
+                    BackgroundColor="{StaticResource Primary}"
+                    Margin="0,0,0,20"/>
+
+            <!-- Cancel Button -->
+            <Button Text="Cancel"
+                    Command="{Binding CancelNewApplicationCommand}"
+                    BackgroundColor="{StaticResource Secondary}"/>
+
+            <!-- Loading Indicator -->
+            <ActivityIndicator IsRunning="{Binding IsBusy}"
+                             IsVisible="{Binding IsBusy}"
+                             HorizontalOptions="Center"
+                             VerticalOptions="Center"
+                             Margin="0,20,0,0"/>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

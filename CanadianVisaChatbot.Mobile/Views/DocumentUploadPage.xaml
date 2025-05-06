@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:CanadianVisaChatbot.Mobile.ViewModels"
+             xmlns:models="clr-namespace:CanadianVisaChatbot.Shared.Models;assembly=CanadianVisaChatbot.Shared"
+             x:Class="CanadianVisaChatbot.Mobile.Views.DocumentUploadPage"
+             x:DataType="vm:VisaApplicationViewModel"
+             Title="Upload Document">
+
+    <ScrollView>
+        <StackLayout Padding="20">
+            <!-- Error Message -->
+            <Label Text="{Binding ErrorMessage}"
+                   TextColor="Red"
+                   IsVisible="{Binding ErrorMessage, Converter={StaticResource StringNotNullOrEmptyConverter}}"
+                   Margin="0,0,0,20"/>
+
+            <!-- Document Type Picker -->
+            <Label Text="Document Type"
+                   FontSize="16"
+                   Margin="0,0,0,5"/>
+            <Picker ItemsSource="{Binding Source={x:Static Member=models:DocumentTypeExtensions.Values}}"
+                    SelectedItem="{Binding SelectedDocumentType}"
+                    Margin="0,0,0,20"/>
+
+            <!-- Notes Entry -->
+            <Label Text="Notes"
+                   FontSize="16"
+                   Margin="0,0,0,5"/>
+            <Editor Text="{Binding DocumentNotes}"
+                    HeightRequest="100"
+                    Placeholder="Add any notes about this document..."
+                    Margin="0,0,0,20"/>
+
+            <!-- Upload Button -->
+            <Button Text="Select Document"
+                    Command="{Binding SelectDocumentCommand}"
+                    Margin="0,0,0,10"/>
+
+            <!-- Selected File Name -->
+            <Label Text="{Binding SelectedFileName}"
+                   IsVisible="{Binding SelectedFileName, Converter={StaticResource StringNotNullOrEmptyConverter}}"
+                   Margin="0,0,0,20"/>
+
+            <!-- Submit Button -->
+            <Button Text="Upload Document"
+                    Command="{Binding UploadDocumentCommand}"
+                    IsEnabled="{Binding CanUpload}"
+                    BackgroundColor="{StaticResource Primary}"/>
+
+            <!-- Loading Indicator -->
+            <ActivityIndicator IsRunning="{Binding IsBusy}"
+                             IsVisible="{Binding IsBusy}"
+                             HorizontalOptions="Center"
+                             VerticalOptions="Center"
+                             Margin="0,20,0,0"/>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

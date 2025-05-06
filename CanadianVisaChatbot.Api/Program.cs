@@ -1,29 +1,41 @@
 using CanadianVisaChatbot.Shared.AI.Extensions;
-using FirebaseAdmin;
-using Google.Apis.Auth.OAuth2;
+using CanadianVisaChatbot.Shared.Services;
+using Google.Cloud.Firestore;
+using Google.Cloud.Storage.V1;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.HttpLogging;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configure logging
-builder.Logging.ClearProviders();
-builder.Logging.AddConsole();
-if (builder.Environment.IsDevelopment())
-{
-    builder.Logging.AddDebug();
-    builder.Logging.SetMinimumLevel(LogLevel.Debug);
-}
+// Add authentication
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        // For development, accept any token
+        options.Events = new JwtBearerEvents
+        {
+            OnMessageReceived = context =>
+            {
+                Console.WriteLine("Running in Development mode - Authentication is disabled");
+                return Task.CompletedTask;
+            }
+        };
+    });
 
 // Add services to the container
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c =>
+builder.Services.AddSwaggerGen();
+
+// Add HTTP logging for development
+builder.Services.AddHttpLogging(logging =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Canadian Visa Chatbot API", Version = "v1" });
+    logging.LoggingFields = HttpLoggingFields.All;
+    logging.RequestHeaders.Add("Authorization");
+    logging.ResponseHeaders.Add("Content-Type");
 });
 
-// Add CORS for development
+// Add CORS
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
@@ -34,54 +46,25 @@ builder.Services.AddCors(options =>
     });
 });
 
+// Configure Firebase
+var firestoreDb = new FirestoreDbBuilder
+{
+    ProjectId = builder.Configuration["Firebase:ProjectId"],
+    JsonCredentials = File.ReadAllText("firebase-credentials.json")
+}.Build();
+
+var storage = StorageClient.Create();
+builder.Services.AddSingleton(firestoreDb);
+builder.Services.AddSingleton(storage);
+
 // Add DeepSeek services
 builder.Services.AddVisaServices(
-    builder.Configuration["DeepSeek:ApiKey"] ?? throw new InvalidOperationException("DeepSeek API key not found"),
-    builder.Configuration["DeepSeek:BaseUrl"] ?? throw new InvalidOperationException("DeepSeek base URL not found")
+    builder.Configuration["DeepSeek:ApiKey"],
+    builder.Configuration["DeepSeek:BaseUrl"]
 );
 
-// Initialize Firebase Admin
-if (builder.Environment.IsDevelopment())
-{
-    Console.WriteLine("Running in Development mode - Authentication is disabled");
-}
-else 
-{
-    try
-    {
-        if (FirebaseApp.DefaultInstance == null)
-        {
-            var projectId = builder.Configuration["Firebase:ProjectId"] ?? 
-                throw new InvalidOperationException("Firebase project ID not found in configuration");
-
-            FirebaseApp.Create(new AppOptions
-            {
-                Credential = GoogleCredential.GetApplicationDefault(),
-                ProjectId = projectId
-            });
-
-            // Add JWT Authentication
-            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options =>
-                {
-                    options.Authority = $"https://securetoken.google.com/{projectId}";
-                    options.TokenValidationParameters = new()
-                    {
-                        ValidateIssuer = true,
-                        ValidIssuer = $"https://securetoken.google.com/{projectId}",
-                        ValidateAudience = true,
-                        ValidAudience = projectId,
-                        ValidateLifetime = true
-                    };
-                });
-        }
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine($"Firebase initialization failed: {ex.Message}");
-        throw; // In production, we want to fail if Firebase init fails
-    }
-}
+// Register application services
+builder.Services.AddTransient<IVisaApplicationService, VisaApplicationService>();
 
 var app = builder.Build();
 
@@ -90,37 +73,14 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-    app.UseCors();
+    app.UseHttpLogging();
+    Console.WriteLine("Running in Development mode - Authentication is disabled");
 }
 
 app.UseHttpsRedirection();
-
-if (!app.Environment.IsDevelopment())
-{
-    app.UseAuthentication();
-    app.UseAuthorization();
-}
-
-// Global exception handler
-app.UseExceptionHandler(errorApp =>
-{
-    errorApp.Run(async context =>
-    {
-        context.Response.StatusCode = 500;
-        context.Response.ContentType = "application/json";
-        var error = context.Features.Get<Microsoft.AspNetCore.Diagnostics.IExceptionHandlerFeature>();
-        if (error != null)
-        {
-            var ex = error.Error;
-            await context.Response.WriteAsJsonAsync(new 
-            {
-                Message = app.Environment.IsDevelopment() ? ex.Message : "An error occurred processing your request.",
-                Detail = app.Environment.IsDevelopment() ? ex.ToString() : null
-            });
-        }
-    });
-});
-
+app.UseCors();
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
 
 app.Run();

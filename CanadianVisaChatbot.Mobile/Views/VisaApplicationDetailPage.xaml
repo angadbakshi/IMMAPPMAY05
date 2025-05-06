@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:CanadianVisaChatbot.Mobile.ViewModels"
+             xmlns:models="clr-namespace:CanadianVisaChatbot.Shared.Models;assembly=CanadianVisaChatbot.Shared"
+             x:Class="CanadianVisaChatbot.Mobile.Views.VisaApplicationDetailPage"
+             x:DataType="vm:VisaApplicationViewModel"
+             Title="Application Details">
+
+    <RefreshView IsRefreshing="{Binding IsBusy}"
+                 Command="{Binding LoadProgressCommand}">
+        <ScrollView>
+            <StackLayout Padding="20">
+                <!-- Error Message -->
+                <Label Text="{Binding ErrorMessage}"
+                       TextColor="Red"
+                       IsVisible="{Binding ErrorMessage, Converter={StaticResource StringNotNullOrEmptyConverter}}"
+                       Margin="0,0,0,20"/>
+
+                <!-- Application Header -->
+                <Frame Padding="15" Margin="0,0,0,20">
+                    <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="*,Auto">
+                        <Label Text="{Binding CurrentApplication.Type}"
+                               FontSize="24"
+                               FontAttributes="Bold"
+                               Grid.Row="0"/>
+                        
+                        <Label Text="{Binding CurrentApplication.Status}"
+                               FontSize="16"
+                               TextColor="{StaticResource Secondary}"
+                               Grid.Row="1"/>
+                        
+                        <Label Text="{Binding CurrentApplication.CreatedDate, StringFormat='Created: {0:d}'}"
+                               FontSize="14"
+                               TextColor="{StaticResource TextSecondary}"
+                               Grid.Row="2"/>
+
+                        <Button Text="Upload Document"
+                                Command="{Binding NavigateToUploadCommand}"
+                                Grid.Column="1"
+                                Grid.RowSpan="2"/>
+                    </Grid>
+                </Frame>
+
+                <!-- Progress Section -->
+                <Label Text="Application Progress"
+                       FontSize="20"
+                       FontAttributes="Bold"
+                       Margin="0,0,0,10"/>
+
+                <Frame Padding="15" Margin="0,0,0,20">
+                    <StackLayout>
+                        <Label Text="{Binding Progress.Percentage, StringFormat='{0:F0}%'}"
+                               HorizontalOptions="Center"
+                               FontSize="24"
+                               FontAttributes="Bold"/>
+                        
+                        <ProgressBar Progress="{Binding Progress.Percentage}"
+                                    ProgressColor="{Binding Progress.Percentage, Converter={StaticResource ApplicationProgressColorConverter}}"
+                                    Margin="0,10"/>
+
+                        <Label Text="{Binding Progress.CurrentStep.Name}"
+                               FontSize="16"
+                               HorizontalOptions="Center"
+                               Margin="0,10"/>
+                    </StackLayout>
+                </Frame>
+
+                <!-- Documents Section -->
+                <Label Text="Required Documents"
+                       FontSize="20"
+                       FontAttributes="Bold"
+                       Margin="0,0,0,10"/>
+
+                <CollectionView ItemsSource="{Binding CurrentApplication.Documents}"
+                              EmptyView="No documents uploaded yet.">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:DocumentInfo">
+                            <Frame Margin="0,0,0,10" Padding="15">
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <StackLayout Grid.Column="0">
+                                        <Label Text="{Binding Name}"
+                                               FontAttributes="Bold"
+                                               FontSize="16"/>
+                                        
+                                        <Label Text="{Binding Type}"
+                                               FontSize="14"/>
+                                        
+                                        <Label Text="{Binding Status}"
+                                               TextColor="{Binding Status, Converter={StaticResource DocumentStatusColorConverter}}"
+                                               FontSize="14"/>
+                                        
+                                        <Label Text="{Binding SubmittedDate, StringFormat='Submitted: {0:d}'}"
+                                               IsVisible="{Binding SubmittedDate, Converter={StaticResource NotNullConverter}}"
+                                               FontSize="12"
+                                               TextColor="{StaticResource TextSecondary}"/>
+
+                                        <CollectionView ItemsSource="{Binding ValidationMessages}"
+                                                      IsVisible="{Binding ValidationMessages, Converter={StaticResource NotNullOrEmptyConverter}}">
+                                            <CollectionView.ItemTemplate>
+                                                <DataTemplate x:DataType="x:String">
+                                                    <Label Text="{Binding}"
+                                                           TextColor="{StaticResource Secondary}"
+                                                           FontSize="12"/>
+                                                </DataTemplate>
+                                            </CollectionView.ItemTemplate>
+                                        </CollectionView>
+                                    </StackLayout>
+
+                                    <Button Text="Download"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:VisaApplicationViewModel}}, Path=DownloadDocumentCommand}"
+                                            CommandParameter="{Binding}"
+                                            Grid.Column="1"
+                                            IsVisible="{Binding StoragePath, Converter={StaticResource StringNotNullOrEmptyConverter}}"/>
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+        </ScrollView>
+    </RefreshView>
+</ContentPage>

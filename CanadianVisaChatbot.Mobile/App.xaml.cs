@@ -1,38 +1,23 @@
-﻿namespace CanadianVisaChatbot.Mobile;
+﻿using CanadianVisaChatbot.Mobile.Views;
+
+namespace CanadianVisaChatbot.Mobile;
 
 public partial class App : Application
 {
-    public App(IServiceProvider serviceProvider)
+    public App()
     {
         InitializeComponent();
+        MainPage = new AppShell();
 
-        var chatPage = serviceProvider.GetRequiredService<Views.ChatPage>();
-        MainPage = new NavigationPage(chatPage)
-        {
-            BarTextColor = Colors.White,
-            BarBackgroundColor = Color.FromArgb("#0078D4")
-        };
+        // Register routes
+        Routing.RegisterRoute("applications/details", typeof(VisaApplicationDetailPage));
+        Routing.RegisterRoute("applications/upload", typeof(DocumentUploadPage));
+        Routing.RegisterRoute("applications/new", typeof(NewApplicationPage));
     }
 
-    protected override Window CreateWindow(IActivationState? activationState)
+    protected override Window CreateWindow(IActivationState activationState)
     {
         var window = base.CreateWindow(activationState);
-
-        if (window != null)
-        {
-            window.Title = "Canadian Visa Assistant";
-            
-            // Set default window size for desktop platforms
-            if (DeviceInfo.Current.Platform == DevicePlatform.MacCatalyst ||
-                DeviceInfo.Current.Platform == DevicePlatform.WinUI)
-            {
-                window.Width = 800;
-                window.Height = 600;
-                window.MinimumWidth = 400;
-                window.MinimumHeight = 400;
-            }
-        }
-
         return window;
     }
 }

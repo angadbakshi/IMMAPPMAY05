@@ -2,6 +2,7 @@
 <Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:CanadianVisaChatbot.Mobile"
+             xmlns:converters="clr-namespace:CanadianVisaChatbot.Mobile.Converters"
              x:Class="CanadianVisaChatbot.Mobile.App">
     <Application.Resources>
         <ResourceDictionary>
@@ -10,34 +11,78 @@
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
-            <!-- Custom Colors -->
-            <Color x:Key="PrimaryColor">#0078D4</Color>
-            <Color x:Key="SecondaryColor">#6C757D</Color>
-            <Color x:Key="AccentColor">#512BD4</Color>
-            <Color x:Key="BackgroundColor">#F8F9FA</Color>
+            <!-- Colors -->
+            <Color x:Key="Primary">#0D6EFD</Color>
+            <Color x:Key="Secondary">#6C757D</Color>
+            <Color x:Key="Success">#198754</Color>
+            <Color x:Key="Danger">#DC3545</Color>
+            <Color x:Key="Warning">#FFC107</Color>
+            <Color x:Key="Info">#0DCAF0</Color>
+            <Color x:Key="Background">#F8F9FA</Color>
+            <Color x:Key="Surface">#FFFFFF</Color>
+            <Color x:Key="TextPrimary">#212529</Color>
+            <Color x:Key="TextSecondary">#6C757D</Color>
 
-            <!-- Custom Styles -->
-            <Style TargetType="NavigationPage">
-                <Setter Property="BarBackgroundColor" Value="{StaticResource PrimaryColor}" />
-                <Setter Property="BarTextColor" Value="White" />
+            <!-- Converters -->
+            <converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+            <converters:StringNotNullOrEmptyConverter x:Key="StringNotNullOrEmptyConverter" />
+            <converters:NotNullConverter x:Key="NotNullConverter" />
+            <converters:DocumentStatusColorConverter x:Key="DocumentStatusColorConverter" />
+            <converters:ApplicationProgressColorConverter x:Key="ApplicationProgressColorConverter" />
+            <converters:MessageBackgroundConverter x:Key="MessageBackgroundConverter" />
+
+            <!-- Styles -->
+            <Style TargetType="Page">
+                <Setter Property="BackgroundColor" Value="{StaticResource Background}" />
             </Style>
 
-            <Style TargetType="Button">
-                <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
-                <Setter Property="TextColor" Value="White" />
-                <Setter Property="CornerRadius" Value="8" />
-                <Setter Property="Padding" Value="16,8" />
-            </Style>
-
-            <Style TargetType="Frame">
-                <Setter Property="CornerRadius" Value="8" />
-                <Setter Property="HasShadow" Value="True" />
-                <Setter Property="BorderColor" Value="{StaticResource SecondaryColor}" />
+            <Style TargetType="Shell">
+                <Setter Property="BackgroundColor" Value="{StaticResource Surface}" />
+                <Setter Property="ForegroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="TitleColor" Value="{StaticResource TextPrimary}" />
             </Style>
 
             <Style TargetType="Label">
-                <Setter Property="TextColor" Value="#212529" />
-                <Setter Property="FontFamily" Value="OpenSansRegular" />
+                <Setter Property="TextColor" Value="{StaticResource TextPrimary}" />
+            </Style>
+
+            <Style TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="CornerRadius" Value="8" />
+                <Setter Property="Padding" Value="16,8" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+
+            <Style TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="{StaticResource Surface}" />
+                <Setter Property="CornerRadius" Value="8" />
+                <Setter Property="BorderColor" Value="#DDDDDD" />
+                <Setter Property="HasShadow" Value="True" />
+            </Style>
+
+            <Style TargetType="ProgressBar">
+                <Setter Property="ProgressColor" Value="{StaticResource Primary}" />
+                <Setter Property="HeightRequest" Value="6" />
+            </Style>
+
+            <Style TargetType="ActivityIndicator">
+                <Setter Property="Color" Value="{StaticResource Primary}" />
+            </Style>
+
+            <Style TargetType="Entry">
+                <Setter Property="BackgroundColor" Value="{StaticResource Surface}" />
+                <Setter Property="TextColor" Value="{StaticResource TextPrimary}" />
+            </Style>
+
+            <Style TargetType="Editor">
+                <Setter Property="BackgroundColor" Value="{StaticResource Surface}" />
+                <Setter Property="TextColor" Value="{StaticResource TextPrimary}" />
+            </Style>
+
+            <Style TargetType="Picker">
+                <Setter Property="BackgroundColor" Value="{StaticResource Surface}" />
+                <Setter Property="TextColor" Value="{StaticResource TextPrimary}" />
             </Style>
         </ResourceDictionary>
     </Application.Resources>
