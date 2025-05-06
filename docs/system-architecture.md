@@ -57,16 +57,16 @@ graph TD
 ```
 
 ### 2. Integration Points
-- <span style="color:green">DeepSeek AI API</span>
-- <span style="color:green">Firebase Authentication</span>
-- <span style="color:green">Document Storage</span>
+- ✅ DeepSeek AI API
+- ✅ Firebase Authentication
+- ✅ Document Storage
 - External Services
 
 ### 3. Security Measures
-- <span style="color:green">JWT Authentication</span>
-- <span style="color:green">API Key Management</span>
-- <span style="color:green">Secure Storage</span>
-- <span style="color:green">Data Encryption</span>
+- ✅ JWT Authentication
+- ✅ API Key Management
+- ✅ Secure Storage
+- ✅ Data Encryption
 
 ## Technical Stack
 
