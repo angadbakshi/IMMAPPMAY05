@@ -2,7 +2,6 @@
 using CanadianVisaChatbot.Mobile.Services;
 using CanadianVisaChatbot.Mobile.ViewModels;
 using CanadianVisaChatbot.Mobile.Views;
-using Syncfusion.Maui.Core.Hosting;
 
 namespace CanadianVisaChatbot.Mobile;
 
@@ -13,18 +12,33 @@ public static class MauiProgram
         var builder = MauiApp.CreateBuilder();
         builder
             .UseMauiApp<App>()
-            .ConfigureSyncfusionCore()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
 
+        // Get the device platform
+        var platform = DeviceInfo.Current.Platform;
+
+        // Configure API base URL based on platform
+        var apiBaseUrl = platform == DevicePlatform.iOS ? 
+            "http://localhost:7002" :  // Use http for iOS simulator
+            "https://localhost:7001";   // Use https for other platforms
+
         // Register HttpClient with base URL
         builder.Services.AddHttpClient<IVisaApiService, VisaApiService>(client =>
         {
-            client.BaseAddress = new Uri("https://localhost:7001/");
+            client.BaseAddress = new Uri(apiBaseUrl);
             client.DefaultRequestHeaders.Add("Accept", "application/json");
+            
+            // Configure timeout
+            client.Timeout = TimeSpan.FromSeconds(30);
+        })
+        .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
+        {
+            // Allow self-signed certificates in development
+            ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true
         });
 
         // Register ViewModels

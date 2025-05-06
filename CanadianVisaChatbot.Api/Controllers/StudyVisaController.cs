@@ -1,4 +1,4 @@
-using CanadianVisaChatbot.Api.Models;
+using CanadianVisaChatbot.Shared.Models;
 using CanadianVisaChatbot.Shared.AI.Services;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,12 +1,6 @@
-/Users/angadbakshi/Projects/IMMAPPMAY05/CanadianVisaChatbot.Api/obj/Debug/net8.0/CanadianVisaChatbot.Api.csproj.AssemblyReference.cache
-/Users/angadbakshi/Projects/IMMAPPMAY05/CanadianVisaChatbot.Api/obj/Debug/net8.0/CanadianVisaChatbot.Api.GeneratedMSBuildEditorConfig.editorconfig
-/Users/angadbakshi/Projects/IMMAPPMAY05/CanadianVisaChatbot.Api/obj/Debug/net8.0/CanadianVisaChatbot.Api.AssemblyInfoInputs.cache
-/Users/angadbakshi/Projects/IMMAPPMAY05/CanadianVisaChatbot.Api/obj/Debug/net8.0/CanadianVisaChatbot.Api.AssemblyInfo.cs
-/Users/angadbakshi/Projects/IMMAPPMAY05/CanadianVisaChatbot.Api/obj/Debug/net8.0/CanadianVisaChatbot.Api.csproj.CoreCompileInputs.cache
-/Users/angadbakshi/Projects/IMMAPPMAY05/CanadianVisaChatbot.Api/obj/Debug/net8.0/CanadianVisaChatbot.Api.MvcApplicationPartsAssemblyInfo.cs
-/Users/angadbakshi/Projects/IMMAPPMAY05/CanadianVisaChatbot.Api/obj/Debug/net8.0/CanadianVisaChatbot.Api.MvcApplicationPartsAssemblyInfo.cache
 /Users/angadbakshi/Projects/IMMAPPMAY05/CanadianVisaChatbot.Api/bin/Debug/net8.0/appsettings.Development.json
 /Users/angadbakshi/Projects/IMMAPPMAY05/CanadianVisaChatbot.Api/bin/Debug/net8.0/appsettings.json
+/Users/angadbakshi/Projects/IMMAPPMAY05/CanadianVisaChatbot.Api/bin/Debug/net8.0/firebase-credentials.json
 /Users/angadbakshi/Projects/IMMAPPMAY05/CanadianVisaChatbot.Api/bin/Debug/net8.0/CanadianVisaChatbot.Api.staticwebassets.endpoints.json
 /Users/angadbakshi/Projects/IMMAPPMAY05/CanadianVisaChatbot.Api/bin/Debug/net8.0/CanadianVisaChatbot.Api
 /Users/angadbakshi/Projects/IMMAPPMAY05/CanadianVisaChatbot.Api/bin/Debug/net8.0/CanadianVisaChatbot.Api.deps.json
@@ -51,6 +45,14 @@
 /Users/angadbakshi/Projects/IMMAPPMAY05/CanadianVisaChatbot.Api/bin/Debug/net8.0/System.Linq.Async.dll
 /Users/angadbakshi/Projects/IMMAPPMAY05/CanadianVisaChatbot.Api/bin/Debug/net8.0/CanadianVisaChatbot.Shared.dll
 /Users/angadbakshi/Projects/IMMAPPMAY05/CanadianVisaChatbot.Api/bin/Debug/net8.0/CanadianVisaChatbot.Shared.pdb
+/Users/angadbakshi/Projects/IMMAPPMAY05/CanadianVisaChatbot.Api/obj/Debug/net8.0/CanadianVisaChatbot.Api.csproj.AssemblyReference.cache
+/Users/angadbakshi/Projects/IMMAPPMAY05/CanadianVisaChatbot.Api/obj/Debug/net8.0/CanadianVisaChatbot.Api.GeneratedMSBuildEditorConfig.editorconfig
+/Users/angadbakshi/Projects/IMMAPPMAY05/CanadianVisaChatbot.Api/obj/Debug/net8.0/CanadianVisaChatbot.Api.AssemblyInfoInputs.cache
+/Users/angadbakshi/Projects/IMMAPPMAY05/CanadianVisaChatbot.Api/obj/Debug/net8.0/CanadianVisaChatbot.Api.AssemblyInfo.cs
+/Users/angadbakshi/Projects/IMMAPPMAY05/CanadianVisaChatbot.Api/obj/Debug/net8.0/CanadianVisaChatbot.Api.csproj.CoreCompileInputs.cache
+/Users/angadbakshi/Projects/IMMAPPMAY05/CanadianVisaChatbot.Api/obj/Debug/net8.0/CanadianVisaChatbot.Api.MvcApplicationPartsAssemblyInfo.cs
+/Users/angadbakshi/Projects/IMMAPPMAY05/CanadianVisaChatbot.Api/obj/Debug/net8.0/CanadianVisaChatbot.Api.MvcApplicationPartsAssemblyInfo.cache
+/Users/angadbakshi/Projects/IMMAPPMAY05/CanadianVisaChatbot.Api/obj/Debug/net8.0/CanadianVisaChatbot.Api.sourcelink.json
 /Users/angadbakshi/Projects/IMMAPPMAY05/CanadianVisaChatbot.Api/obj/Debug/net8.0/scopedcss/bundle/CanadianVisaChatbot.Api.styles.css
 /Users/angadbakshi/Projects/IMMAPPMAY05/CanadianVisaChatbot.Api/obj/Debug/net8.0/staticwebassets.build.json
 /Users/angadbakshi/Projects/IMMAPPMAY05/CanadianVisaChatbot.Api/obj/Debug/net8.0/staticwebassets.development.json
@@ -67,4 +69,3 @@
 /Users/angadbakshi/Projects/IMMAPPMAY05/CanadianVisaChatbot.Api/obj/Debug/net8.0/CanadianVisaChatbot.Api.pdb
 /Users/angadbakshi/Projects/IMMAPPMAY05/CanadianVisaChatbot.Api/obj/Debug/net8.0/CanadianVisaChatbot.Api.genruntimeconfig.cache
 /Users/angadbakshi/Projects/IMMAPPMAY05/CanadianVisaChatbot.Api/obj/Debug/net8.0/ref/CanadianVisaChatbot.Api.dll
-/Users/angadbakshi/Projects/IMMAPPMAY05/CanadianVisaChatbot.Api/bin/Debug/net8.0/firebase-credentials.json

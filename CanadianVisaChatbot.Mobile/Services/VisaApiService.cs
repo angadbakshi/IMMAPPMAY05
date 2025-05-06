@@ -1,5 +1,6 @@
 using System.Net.Http.Json;
-using CanadianVisaChatbot.Api.Models;
+using CanadianVisaChatbot.Shared.Models;
+using Microsoft.Extensions.Logging;
 
 namespace CanadianVisaChatbot.Mobile.Services;
 

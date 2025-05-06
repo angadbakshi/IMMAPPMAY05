@@ -1,24 +1,44 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:chat="clr-namespace:Syncfusion.Maui.Chat;assembly=Syncfusion.Maui.Chat"
              xmlns:viewmodels="clr-namespace:CanadianVisaChatbot.Mobile.ViewModels"
              xmlns:models="clr-namespace:CanadianVisaChatbot.Mobile.Models"
+             xmlns:converters="clr-namespace:CanadianVisaChatbot.Mobile.Converters"
              x:Class="CanadianVisaChatbot.Mobile.Views.ChatPage"
              x:DataType="viewmodels:ChatViewModel"
              Title="Canadian Visa Assistant">
     
-    <Grid RowDefinitions="*">
-        <chat:SfChat x:Name="ChatControl"
-                     Messages="{Binding Messages}"
-                     CurrentUser="User"
-                     ShowTypingIndicator="{Binding IsBusy}"
-                     MessageTemplate="{StaticResource MessageTemplate}">
-            
-            <chat:SfChat.SendMessageCommand>
-                <Binding Path="SendMessageCommand"/>
-            </chat:SfChat.SendMessageCommand>
-        </chat:SfChat>
+    <Grid RowDefinitions="*,Auto">
+        <CollectionView ItemsSource="{Binding Messages}"
+                       SelectionMode="None"
+                       VerticalOptions="FillAndExpand">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:ChatMessage">
+                    <Grid Padding="8" ColumnDefinitions="*,*">
+                        <Frame BorderColor="LightGray"
+                               BackgroundColor="{Binding IsFromUser, 
+                                   Converter={StaticResource MessageBackgroundConverter}}"
+                               Padding="8"
+                               CornerRadius="8"
+                               HorizontalOptions="{Binding IsFromUser, 
+                                   Converter={StaticResource MessageAlignmentConverter}}">
+                            <Label Text="{Binding Text}"
+                                   TextColor="Black"
+                                   FontSize="14"/>
+                        </Frame>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Grid Grid.Row="1" ColumnDefinitions="*,Auto" Padding="8">
+            <Entry Text="{Binding CurrentMessage}" 
+                   Placeholder="Type your message..."
+                   ReturnCommand="{Binding SendMessageCommand}"/>
+            <Button Grid.Column="1" 
+                    Text="Send" 
+                    Command="{Binding SendMessageCommand}"/>
+        </Grid>
 
         <ActivityIndicator IsRunning="{Binding IsBusy}"
                          IsVisible="{Binding IsBusy}"
@@ -27,26 +47,7 @@
     </Grid>
 
     <ContentPage.Resources>
-        <DataTemplate x:Key="MessageTemplate">
-            <chat:MessageTemplateSelector>
-                <chat:MessageTemplateSelector.TextMessageTemplate>
-                    <DataTemplate x:DataType="models:ChatMessage">
-                        <Grid Padding="8">
-                            <Frame BorderColor="LightGray"
-                                   BackgroundColor="{Binding Position,
-                                        Converter={StaticResource MessageBackgroundConverter}}"
-                                   Padding="8"
-                                   CornerRadius="8">
-                                <Label Text="{Binding Text}"
-                                       TextColor="Black"
-                                       FontSize="14"/>
-                            </Frame>
-                        </Grid>
-                    </DataTemplate>
-                </chat:MessageTemplateSelector.TextMessageTemplate>
-            </chat:MessageTemplateSelector>
-        </DataTemplate>
-
         <converters:MessageBackgroundConverter x:Key="MessageBackgroundConverter"/>
+        <converters:MessageAlignmentConverter x:Key="MessageAlignmentConverter"/>
     </ContentPage.Resources>
 </ContentPage>

@@ -1,6 +1,6 @@
-çusing CanadianVisaChatbot.Shared.AI.Services;
-using Microsoft.Extensions.DependencyInjection;
 using System.Net.Http.Headers;
+using CanadianVisaChatbot.Shared.AI.Services;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CanadianVisaChatbot.Shared.AI.Extensions;
 
@@ -24,15 +24,9 @@ public static class ServiceCollectionExtensions
             // Add recommended headers
             client.DefaultRequestHeaders.Add("User-Agent", "CanadianVisaChatbot/1.0");
             
-            // Configure timeouts for long-running requests
+            // Configure timeouts
             client.Timeout = TimeSpan.FromSeconds(60);
-        })
-        .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
-        {
-            // Enable SSL/TLS
-            ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
-        })
-        .SetHandlerLifetime(TimeSpan.FromMinutes(5));
+        });
 
         // Register visa processing service
         services.AddScoped<IVisaProcessingService, VisaProcessingService>();

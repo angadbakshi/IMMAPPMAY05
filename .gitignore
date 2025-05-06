@@ -1,0 +1,44 @@
+# General
+.DS_Store
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build outputs
+bin/
+obj/
+
+# NuGet packages
+.nuget/
+*.nupkg
+
+# Visual Studio files
+.vs/
+.vscode/
+
+# MAUI specific
+*.apk
+*.aab
+*.ipa
+*.appxbundle
+*.appxupload
+*.msix
+*.msixupload
+*.appx
+*.msixbundle
+*.appinstaller
+
+# Sensitive files
+firebase-credentials.json
+google-services.json
+GoogleService-Info.plist
+
+# Rider/Resharper
+_ReSharper.*/
+*.sln.iml
+.idea/
+
+# Local development files
+appsettings.Development.json
+launchSettings.json

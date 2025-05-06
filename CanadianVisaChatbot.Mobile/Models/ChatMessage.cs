@@ -1,20 +1,12 @@
-using Syncfusion.Maui.Chat;
-
 namespace CanadianVisaChatbot.Mobile.Models;
 
-public class ChatMessage : IAuthor, IChatMessage
+public class ChatMessage
 {
     public string Author { get; set; } = string.Empty;
     public string Text { get; set; } = string.Empty;
     public DateTime DateTime { get; set; }
-    public object? Data { get; set; }
-
-    // IAuthor implementation
     public string? Avatar { get; set; }
-    public string? Name => Author;
-
-    public MessageType MessageType { get; set; }
-    public MessagePosition Position { get; set; }
+    public bool IsFromUser { get; set; }
 }
 
 public class VisaApplicationData

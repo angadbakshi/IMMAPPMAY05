@@ -3,7 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CanadianVisaChatbot.Mobile.Models;
 using CanadianVisaChatbot.Mobile.Services;
-using Syncfusion.Maui.Chat;
+using Microsoft.Extensions.Logging;
 
 namespace CanadianVisaChatbot.Mobile.ViewModels;
 
@@ -32,19 +32,24 @@ public partial class ChatViewModel : ObservableObject
     [ObservableProperty]
     private bool _isBusy;
 
+    [ObservableProperty]
+    private string _currentMessage = string.Empty;
+
     [RelayCommand]
-    private async Task SendMessageAsync(string message)
+    private async Task SendMessageAsync()
     {
-        if (string.IsNullOrWhiteSpace(message)) return;
+        if (string.IsNullOrWhiteSpace(CurrentMessage)) return;
 
         try
         {
             IsBusy = true;
-            AddUserMessage(message);
-
+            AddUserMessage(CurrentMessage);
+            
             // Process the message and get bot response
-            var response = await ProcessUserMessageAsync(message);
+            var response = await ProcessUserMessageAsync(CurrentMessage);
             AddBotMessage(response);
+            
+            CurrentMessage = string.Empty;
         }
         catch (Exception ex)
         {
@@ -221,8 +226,7 @@ public partial class ChatViewModel : ObservableObject
             Author = "User",
             Text = message,
             DateTime = DateTime.Now,
-            MessageType = MessageType.Text,
-            Position = MessagePosition.Right
+            IsFromUser = true
         });
     }
 
@@ -233,8 +237,7 @@ public partial class ChatViewModel : ObservableObject
             Author = "CanadianVisaBot",
             Text = message,
             DateTime = DateTime.Now,
-            MessageType = MessageType.Text,
-            Position = MessagePosition.Left
+            IsFromUser = false
         });
     }
 }
