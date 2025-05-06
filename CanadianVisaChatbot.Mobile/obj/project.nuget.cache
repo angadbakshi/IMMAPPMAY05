@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "sfLdDsnM3qo=",
+  "dgSpecHash": "CxIW5DnXe6A=",
   "success": true,
   "projectFilePath": "/Users/angadbakshi/Projects/IMMAPPMAY05/CanadianVisaChatbot.Mobile/CanadianVisaChatbot.Mobile.csproj",
   "expectedPackageFiles": [
@@ -219,8 +219,7 @@
     "/Users/angadbakshi/.nuget/packages/microsoft.ios.runtime.iossimulator-x64.net8.0_18.0/18.0.8324/microsoft.ios.runtime.iossimulator-x64.net8.0_18.0.18.0.8324.nupkg.sha512",
     "/Users/angadbakshi/.nuget/packages/microsoft.netcore.app.ref/8.0.15/microsoft.netcore.app.ref.8.0.15.nupkg.sha512",
     "/Users/angadbakshi/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.15/microsoft.aspnetcore.app.ref.8.0.15.nupkg.sha512",
-    "/Users/angadbakshi/.nuget/packages/microsoft.maccatalyst.ref.net8.0_18.0/18.0.8324/microsoft.maccatalyst.ref.net8.0_18.0.18.0.8324.nupkg.sha512",
-    "/Users/angadbakshi/.nuget/packages/microsoft.maccatalyst.runtime.maccatalyst-arm64.net8.0_18.0/18.0.8324/microsoft.maccatalyst.runtime.maccatalyst-arm64.net8.0_18.0.18.0.8324.nupkg.sha512"
+    "/Users/angadbakshi/.nuget/packages/microsoft.maccatalyst.ref.net8.0_18.0/18.0.8324/microsoft.maccatalyst.ref.net8.0_18.0.18.0.8324.nupkg.sha512"
   ],
   "logs": []
 }
